@@ -1,0 +1,21 @@
+{
+  "name": "tapcap",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mohamed-Elzohary/tapcap.git"
+  },
+  "keywords": ["video", "caption", "subtitle", "tapcap"],
+  "author": "Mohamed Elzohary",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1"
+  }
+}
