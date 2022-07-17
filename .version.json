@@ -1,0 +1,10 @@
+{
+    "v0.0.0": "init files",
+    "v0.0.1": "index page skeleton",
+    "v0.0.2": "index page styling",
+    "v0.0.3": "video controllers: play-pause, fullscreen",
+    "v0.0.4": "video controllers: un/mute volume",
+    "v0.0.5": "video controllers: in-video captions",
+    "v0.0.6": "video controllers: out-video captions",
+    "v0.0.7": "add new caption form"
+}
