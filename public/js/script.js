@@ -29,7 +29,7 @@ function init() {
     createButtons(tracks);
     loadAllTracks(tracks);
     enableButtons(tracks);
-    
+
     showCurrentCC(tracks[0]);
     showCCList(tracks[0]);
     updateSeeker(video);
@@ -135,11 +135,18 @@ function showCC() {
     }
 }
 
+
 function showCCList(track) {
     var cues = track.track.cues;
     console.log(track.track.cue);
     if (track.track.mode === 'hidden') {
         trackCC.innerHTML = "";
+        trackCC.innerHTML += `
+            <div id="update_form_btns">
+                <button id="update_btn" type="submit" disabled>Update</button>
+                <button id="time_now" type="submit" disabled>Time Now</button>
+            </div>
+        `;
         for (var i = 0; i < cues.length; i++) {
             highlightCC(cues[i]);
             var cueStartTime = secTOtime(cues[i].startTime);
@@ -159,16 +166,18 @@ function showCCList(track) {
             trackCC.innerHTML += `
             <div class="cue_container cue_item sleepy_cue">
             <span class="cue_time">
-            ${cueStartTimeTxt} <br> - ${cueEndTimeTxt}
+            <input class="time" type="text" name="name" value="${cueStartTimeTxt}" disabled/> 
+            <br> - 
+            <input class="time" type="text" name="name" value="${cueEndTimeTxt}" disabled/> 
             </span>
             <li id='${cueId}'
                 class=''
                 onclick='jumpTo(${cues[i].startTime});'>
-                    ${cueTxt}
-
+                
+                <input class="text" type="text" name="name" value="${cueTxt}" disabled/>
             </li>
 
-            <button type="button" onclick='deleteCC(${cueId});'>
+            <button id="delete_btn" type="button" onclick='deleteCC(${cueId});' disabled>
                 <i class="fa-solid fa-x cue_delete"></i>
             </button>
             </div>
@@ -219,12 +228,12 @@ function highlightCC(caption) {
     var li;
     caption.onenter = function (e) {
         li = document.getElementById(this.id);
-        li.classList.add('active_cue');
-        li.classList.remove('sleepy_cue');
+        li.parentNode.classList.add('active_cue');
+        li.parentNode.classList.remove('sleepy_cue');
     }
     caption.onexit = function (e) {
-        li.classList.add('sleepy_cue');
-        li.classList.remove('active_cue');
+        li.parentNode.classList.add('sleepy_cue');
+        li.parentNode.classList.remove('active_cue');
     }
 }
 

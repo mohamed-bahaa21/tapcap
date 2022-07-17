@@ -42,6 +42,7 @@ h4,
 h5,
 h6,
 label,
+.js-toggleForm,
 input[type="submit"] {
   font-family: "Lobster", cursive;
 }
@@ -79,6 +80,16 @@ textarea {
   padding-top: 1rem;
 }
 
+#update_form_btns {
+  display: flex;
+  justify-content: end;
+  padding: 1rem 0;
+}
+
+#update_form_btns button {
+  margin: 0 0 0 0.75rem;
+}
+
 #cc_container {
   /* width: 200px; */
   flex: 100%;
@@ -86,6 +97,47 @@ textarea {
   background: #181818;
   color: white;
   padding: 1%;
+}
+
+#cc_container #delete_btn {
+  margin-left: 1rem;
+}
+
+#cc_container .time {
+  max-width: 2.5rem;
+  display: inline-block;
+  border: 1px solid #333;
+  background-color: #333;
+  color: #fff;
+  margin-right: 1rem;
+}
+#cc_container .time:focus {
+  border: 1px solid #aaa;
+}
+
+#cc_container .text {
+  overflow: auto;
+  padding: 1rem;
+  /* margin: 1rem; */
+  width: 100%;
+  height: max-content;
+  background-color: #333;
+  color: #aaaaaa;
+  border: 0;
+}
+
+#cc_container .text:hover {
+  cursor: pointer;
+  background-color: #444;
+  text-decoration: none;
+}
+
+#cc_container .text:focus {
+  color: #88d;
+  font-weight: bold;
+  background-color: #225;
+  /* padding: 1rem; */
+  border-radius: 4px;
 }
 
 .hide {
@@ -115,12 +167,12 @@ textarea {
 }
 #delete_modal #close_modal {
   font-size: 0.85em;
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 0;
-    border: 1px solid;
-    border-radius: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+  border: 1px solid;
+  border-radius: 0;
 }
 #delete_modal span {
   display: block;
@@ -140,7 +192,7 @@ textarea {
   color: #aaaaaa;
   font-weight: 100;
   background-color: rgb(51 51 51);
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   border-radius: 4px;
 }
 
@@ -148,7 +200,7 @@ textarea {
   color: #88d;
   font-weight: bold;
   background-color: #225;
-  padding: 1rem;
+  /* padding: 1rem; */
   border-radius: 4px;
 }
 
@@ -282,6 +334,7 @@ li {
 .cue_item {
   margin-bottom: 1rem;
   border-radius: 4px;
+  padding: 1rem;
 }
 
 .cue_item button {
@@ -290,10 +343,9 @@ li {
 }
 
 .cue_item li {
-  padding: 1rem;
   overflow: auto;
-
-  margin: 1rem;
+  /* padding: 1rem; */
+  /* margin: 1rem; */
   width: 100%;
   height: max-content;
 }

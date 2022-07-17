@@ -36,15 +36,18 @@
         <label for="new_caption">New Caption</label>
         <input id="new_caption" name="new_caption" type="text" class='clock' value="">
 
-        <input type="submit" id="add-caption" class="clock">
+        <input type="submit" id="add-caption" class="clock" value="Add Caption">
     </form>
+    
+    <button class="js-toggleForm clock">Enable Update</button>
 
     <div id="video_container" data-fullscreen="false" style="display: flex;">
         <video id="video" class="" controls preload="metadata">
             <source src="/video/video-1.mp4" type="video/mp4">
             <track label="English" kind="subtitles" srclang="English" src="./captions/video.vtt" default>
         </video>
-        <div id="cc_container"></div>
+        <div id="cc_container" class="update_form">
+        </div>
         <ul id="cc_list" class='hidden'></ul>
     </div>
 
@@ -70,12 +73,16 @@
                 class="fa-solid fa-rectangle-list"></i></button>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.0.3/sprintf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.0/utils/Draggable.min.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/video-timeline.js"></script>
+    <script src="/js/toggle-update-form.js"></script>
 
 </body>
 
