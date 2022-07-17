@@ -15,12 +15,14 @@ var mute = document.getElementById('mute');
 var fullscreen = document.getElementById('fullscreen');
 var in_video_captions = document.getElementById('in_video_captions');
 var out_video_captions = document.getElementById('out_video_captions');
+var video_duration = document.getElementById('video_duration');
 
 function init() {
     video.controls = false;
     videoControls.setAttribute('data-state', 'visible');
     video.volume = 1;
 
+    updateTimeFrame(video);
     createButtons(tracks);
     loadAllTracks(tracks);
     enableButtons(tracks);
@@ -28,6 +30,27 @@ function init() {
     showCCList(tracks[0]);
     updateSeeker(video);
     showCC(video)
+}
+
+function updateTimeFrame(video) {
+    if (video.duration) {
+        var durationTime = secTOtime(video.duration);
+        var currentTime = secTOtime(video.currentTime);
+        var durationTxt, currentTxt;
+
+        if (durationTime.hoursT == "00") {
+            durationTxt = `${durationTime.minutesT}:${durationTime.secondsT}`;
+            currentTxt = `${currentTime.minutesT}:${currentTime.secondsT}`;
+        } else {
+            durationTxt = `${durationTime.hoursT}:${durationTime.minutesT}:${durationTime.secondsT}`;
+            currentTxt = `${currentTime.hoursT}:${currentTime.minutesT}:${currentTime.secondsT}`;
+        }
+
+        video_duration.innerHTML = `${durationTxt} / ${currentTxt}`;
+    } else {
+        durationTxt = `00:00:00`;
+        video_duration.innerHTML = durationTxt;
+    }
 }
 
 function play() {
@@ -75,6 +98,7 @@ var handleFullscreen = function () {
 function updateSeeker(vid) {
     vid.addEventListener('timeupdate', function (e) {
         video_time.value = Math.round(video.currentTime * 1000);
+        updateTimeFrame();
     })
 }
 
@@ -112,7 +136,7 @@ function showCCList(track) {
         trackCC.innerHTML = "";
         for (var i = 0; i < cues.length; i++) {
             highlightCC(cues[i]);
-            trackCC.innerHTML += `<li id='${cues[i].id}' class='cue_list sleepy_cue'  onclick='jumpTo(${cues[i].startTime});'> ${cues[i].text} </li>`;
+            trackCC.innerHTML += `${cues[i].startTime} - ${cues[i].endTime}<li id='${cues[i].id}' class='cue_list sleepy_cue'  onclick='jumpTo(${cues[i].startTime});'> ${cues[i].text}</li>`;
 
         }
     }
@@ -306,5 +330,21 @@ var changeButtonState = function (type) {
     else if (type == 'mute') {
         mute.setAttribute('data-state', video.muted ? 'unmute' : 'mute');
         mute.innerHTML = video.muted ? '<i class="fa-solid fa-volume-xmark"></i>' : '<i class="fa-solid fa-volume-high"></i>'
+    }
+}
+
+function secTOtime(base) {
+    const seconds = Math.floor((base / 1) % 60);
+    const minutes = Math.floor((base / 60) % 60);
+    const hours = Math.floor(base / 3600);
+
+    const secondsT = `${seconds}`.padStart(2, "0");
+    const minutesT = `${minutes}`.padStart(2, "0");
+    const hoursT = `${hours}`.padStart(2, "0");
+
+    return {
+        secondsT,
+        minutesT,
+        hoursT
     }
 }
