@@ -50,7 +50,7 @@ textarea {
   height: 400px;
 }
 
-#video-controls {
+#video_controls {
   display: flex;
   justify-content: center;
   padding-top: 1rem;
@@ -277,7 +277,7 @@ figure:hover {
   transform: scale(0.8);
 }
 /* ============================================ */
-.subtitles-menu {
+.subtitles_menu {
   display: none;
   position: initial;
   bottom: 14.8%;
@@ -290,12 +290,12 @@ figure:hover {
   padding: 10px;
 }
 
-.subtitles-menu li {
+.subtitles_menu li {
   padding: 0;
   text-align: center;
 }
 
-.subtitles-menu li button {
+.subtitles_menu li button {
   border: none;
   background: #000;
   color: #fff;
