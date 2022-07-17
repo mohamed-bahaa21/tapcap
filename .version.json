@@ -6,5 +6,6 @@
     "v0.4.0": "video controllers: un/mute volume",
     "v0.5.0": "video controllers: in-video captions",
     "v0.6.0": "video controllers: out-video captions",
-    "v0.7.0": "add-caption"
+    "v0.7.0": "add-caption feature",
+    "v0.8.0": "video controllers: timeframe-counter"
 }

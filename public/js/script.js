@@ -104,7 +104,8 @@ function updateSeeker(video) {
 
 function jumpTo(time) {
     video.currentTime = time;
-    video.play();
+    vidUpdate();
+    // video.play();
 }
 
 function loadAllTracks(tracks) {
@@ -136,7 +137,28 @@ function showCCList(track) {
         trackCC.innerHTML = "";
         for (var i = 0; i < cues.length; i++) {
             highlightCC(cues[i]);
-            trackCC.innerHTML += `${cues[i].startTime} - ${cues[i].endTime}<li id='${cues[i].id}' class='cue_list sleepy_cue'  onclick='jumpTo(${cues[i].startTime});'> ${cues[i].text}</li>`;
+            var cueStartTime = secTOtime(cues[i].startTime);
+            var cueEndTime = secTOtime(cues[i].endTime);
+
+            var cueStartTimeTxt = `${(cueStartTime.hoursT !== "00") ?
+                `${cueStartTime.hoursT}:${cueStartTime.minutesT}:${cueStartTime.secondsT}` :
+                `${cueStartTime.minutesT}:${cueStartTime.secondsT}`}`
+
+            var cueEndTimeTxt = `${(cueEndTime.hoursT !== "00") ?
+                `${cueEndTime.hoursT}:${cueEndTime.minutesT}:${cueEndTime.secondsT}` :
+                `${cueEndTime.minutesT}:${cueEndTime.secondsT}`}`
+
+            var cueId = cues[i].id;
+            var cueTxt = cues[i].text;
+
+            trackCC.innerHTML += `
+            ${cueStartTimeTxt} - ${cueEndTimeTxt}
+            <li id='${cueId}'
+                class='cue_list sleepy_cue'
+                onclick='jumpTo(${cues[i].startTime});'>
+                    ${cueTxt}
+            </li>
+            `;
 
         }
     }
@@ -191,6 +213,7 @@ playbtn.addEventListener('click', function (e) {
 reset.addEventListener('click', function (e) {
     video.pause();
     video.currentTime = 0;
+    vidUpdate();
     // Update the play/pause button's 'data-state' which allows the correct button image to be set via CSS
     changeButtonState('playbtn');
 });
