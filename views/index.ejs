@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TapCap</title>
-</head>
-<body>
 
-    <h1>TapCap</h1>
-    
+    <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <h1 style="text-align: center;">TapCap</h1>
+
+    <form action="/add-caption" method="post">
+        <label for="video_time">Timeframe</label>
+        <input id="video_time" name="video_time" type="text" class='clock' value="">
+        <label for="new_caption">New Caption</label>
+        <input id="new_caption" name="new_caption" type="text" class='clock' value="">
+
+        <input type="submit" class="clock">
+    </form>
+
+    <div id="video_container" data-fullscreen="false" style="display: flex;">
+        <video id="video" class="" controls preload="metadata">
+            <source src="/video/video-1.mp4" type="video/mp4">
+            <track label="English" kind="subtitles" srclang="English" src="./captions/video.vtt" default>
+        </video>
+        <div id="cc_container"></div>
+        <ul id="cc_list" class='hidden'></ul>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline_dragger"></div>
+        <div class="timeline_progress"></div>
+    </div>
+
+    <div id="video-controls" class="controls" data-state="hidden">
+        <button class="clock" id="playbtn" type="button" data-state="play"><i class="fa-solid fa-play"></i></button>
+        <button class="video__play" onclick="play()" style="display: none;">&gt;II</button>
+        <button class="clock" id="reset" type="button" data-state="reset"><i
+                class="fa-solid fa-arrow-rotate-right"></i></button>
+
+        <button class="clock" id="mute" type="button" data-state="mute"><i class="fa-solid fa-volume-high"></i></button>
+        <button class="clock" id="fullscreen" type="button" data-state="go-fullscreen"><i
+                class="fa-solid fa-expand"></i></button>
+        <button class="clock" id="in_video_captions" type="button" data-state="subtitles"><i
+                class="fa-solid fa-closed-captioning"></i></button>
+        <button class="clock" id="out_video_captions" type="button" data-state="subtitles_list" onclick='showCC();'><i
+                class="fa-solid fa-rectangle-list"></i></button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.0.3/sprintf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.0/utils/Draggable.min.js"></script>
+    <script src="/js/script.js"></script>
+
 </body>
+
 </html>
