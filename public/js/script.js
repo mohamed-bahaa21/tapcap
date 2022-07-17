@@ -95,10 +95,10 @@ var handleFullscreen = function () {
     }
 }
 
-function updateSeeker(vid) {
-    vid.addEventListener('timeupdate', function (e) {
+function updateSeeker(video) {
+    video.addEventListener('timeupdate', function (e) {
         video_time.value = Math.round(video.currentTime * 1000);
-        updateTimeFrame();
+        updateTimeFrame(video);
     })
 }
 
