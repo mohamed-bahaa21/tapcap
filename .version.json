@@ -7,5 +7,6 @@
     "v0.5.0": "video controllers: in-video captions",
     "v0.6.0": "video controllers: out-video captions",
     "v0.7.0": "add-caption feature",
-    "v0.8.0": "video controllers: timeframe-counter"
+    "v0.8.0": "video controllers: timeframe-counter",
+    "v0.9.0": "delete-caption feature"
 }
