@@ -7,10 +7,32 @@ body {
   background: #181818;
   color: #ddd;
   font-family: "Comfortaa", cursive;
+  font-size: 14px;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 h1,
@@ -58,19 +80,67 @@ textarea {
 }
 
 #cc_container {
-  width: 200px;
-  flex: 20%;
+  /* width: 200px; */
+  flex: 100%;
   overflow: auto;
   background: #181818;
   color: white;
-  padding: 2%;
+  padding: 1%;
+}
+
+.hide {
+  display: none;
+}
+
+#black_screen {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: #000;
+  z-index: 998;
+  opacity: 0.7;
+}
+
+#delete_modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  color: #181818;
+  padding: 3rem;
+  margin: 0 auto;
+  border-radius: 4px;
+  z-index: 999;
+}
+#delete_modal #close_modal {
+  font-size: 0.85em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    border: 1px solid;
+    border-radius: 0;
+}
+#delete_modal span {
+  display: block;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+#delete_modal button {
+  display: block;
+  margin: 1rem auto;
+  background-color: rgb(208, 56, 56);
+  color: #fff;
+  font-weight: 700;
 }
 
 .sleepy_cue {
   color: #aaaaaa;
   font-weight: 100;
   background-color: rgb(51 51 51);
-  padding: 1rem;
+  padding: 0 1rem;
   border-radius: 4px;
 }
 
@@ -197,13 +267,41 @@ li {
   list-style-type: none;
 }
 
-.cue_list {
-  margin-bottom: 1rem;
+.cue_container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
-li.cue_list:hover {
+
+.cue_time {
+  font-size: 0.9em;
+  font-weight: 700;
+  line-height: 1rem;
+}
+
+.cue_item {
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.cue_item button {
+  font-size: 0.85em;
+  margin: 0;
+}
+
+.cue_item li {
+  padding: 1rem;
+  overflow: auto;
+
+  margin: 1rem;
+  width: 100%;
+  height: max-content;
+}
+
+.cue_item li:hover {
   cursor: pointer;
-  color: #a3a3ff;
-  text-decoration: underline;
+  background-color: #444;
+  text-decoration: none;
 }
 
 button {

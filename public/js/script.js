@@ -17,6 +17,9 @@ var in_video_captions = document.getElementById('in_video_captions');
 var out_video_captions = document.getElementById('out_video_captions');
 var video_duration = document.getElementById('video_duration');
 
+var black_screen = document.getElementById('black_screen');
+var delete_modal = document.getElementById('delete_modal');
+
 function init() {
     video.controls = false;
     videoControls.setAttribute('data-state', 'visible');
@@ -26,6 +29,7 @@ function init() {
     createButtons(tracks);
     loadAllTracks(tracks);
     enableButtons(tracks);
+    
     showCurrentCC(tracks[0]);
     showCCList(tracks[0]);
     updateSeeker(video);
@@ -133,6 +137,7 @@ function showCC() {
 
 function showCCList(track) {
     var cues = track.track.cues;
+    console.log(track.track.cue);
     if (track.track.mode === 'hidden') {
         trackCC.innerHTML = "";
         for (var i = 0; i < cues.length; i++) {
@@ -152,16 +157,62 @@ function showCCList(track) {
             var cueTxt = cues[i].text;
 
             trackCC.innerHTML += `
-            ${cueStartTimeTxt} - ${cueEndTimeTxt}
+            <div class="cue_container cue_item sleepy_cue">
+            <span class="cue_time">
+            ${cueStartTimeTxt} <br> - ${cueEndTimeTxt}
+            </span>
             <li id='${cueId}'
-                class='cue_list sleepy_cue'
+                class=''
                 onclick='jumpTo(${cues[i].startTime});'>
                     ${cueTxt}
+
             </li>
+
+            <button type="button" onclick='deleteCC(${cueId});'>
+                <i class="fa-solid fa-x cue_delete"></i>
+            </button>
+            </div>
             `;
 
         }
     }
+}
+
+var deleteCue;
+function deleteCC(caption) {
+    black_screen.classList.remove('hide');
+    delete_modal.classList.remove('hide');
+    deleteCue = caption;
+}
+
+function closeDeleteModal() {
+    black_screen.classList.add('hide');
+    delete_modal.classList.add('hide');
+}
+
+function getCC() {
+    axios.get(`/get-captions`)
+        .then(function (response) {
+            console.log(response.data);
+        })
+}
+
+function deleteCC_confirmed() {
+    axios.get(`/delete-caption/${deleteCue}`)
+        .then(function (response) {
+            console.log(response.data.data);
+
+            const index = deleteCue;
+            if (index > -1) { // only splice array when item is found
+                delete tracks[0].track.cues.getCueById(index); // 2nd parameter means remove one item only
+            }
+
+            trackCC.innerHTML = ""
+            tracks[0].setAttribute('src', './captions/video.vtt');
+            showCCList(tracks[0]);
+            closeDeleteModal();
+            location.reload();
+        })
 }
 
 function highlightCC(caption) {

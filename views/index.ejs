@@ -16,6 +16,18 @@
 </head>
 
 <body>
+    <div id="black_screen" class="hide"></div>
+    <div id="delete_modal" class="hide">
+        <button id="close_modal" type="button" onclick='closeDeleteModal();'>
+            <i class="fa-solid fa-x cue_delete"></i>
+        </button>
+
+        <span>Are you sure you want to delete the caption ?</span>
+        <button type="button" onclick='deleteCC_confirmed()'>
+            Delete
+        </button>
+    </div>
+
     <h1 style="text-align: center;">TapCap</h1>
 
     <form action="/add-caption" method="post">
@@ -35,6 +47,7 @@
         <div id="cc_container"></div>
         <ul id="cc_list" class='hidden'></ul>
     </div>
+
 
     <div class="timeline">
         <div class="timeline_dragger"></div>
@@ -57,6 +70,7 @@
                 class="fa-solid fa-rectangle-list"></i></button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.0.3/sprintf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.0/utils/Draggable.min.js"></script>

@@ -42,6 +42,19 @@ app.get('/read-webvtt', (req, res) => {
     });
 })
 
+app.get('/get-captions', (req, res) => {
+    var list = [];
+    fs.createReadStream(webvtt_subtitle_path)
+        .pipe(parse())
+        .on('data', node => {
+            list.push(node)
+        })
+        .on('error', console.error)
+        .on('finish', () => {
+            res.send(list);
+        })
+})
+
 app.post('/add-caption', (req, res) => {
     const { video_time, new_caption } = req.body;
 
@@ -78,6 +91,32 @@ app.post('/add-caption', (req, res) => {
         })
 
     res.redirect('/')
+})
+
+app.get('/delete-caption/:id', (req, res) => {
+    const { id } = req.params;
+
+    var list = []
+
+    fs.createReadStream(webvtt_subtitle_path)
+        .pipe(parse())
+        .on('data', node => {
+            list.push(node)
+        })
+        .on('error', console.error)
+        .on('finish', () => {
+            // const index = list.indexOf(list[id]);
+            const index = id;
+            if (index > -1) { // only splice array when item is found
+                list.splice(index, 1); // 2nd parameter means remove one item only
+            }
+
+            let new_data = stringifySync(list, { format: 'WebVTT' })
+            fs.createWriteStream(webvtt_subtitle_path).write(new_data);
+        })
+
+    res.send(list[id]);
+
 })
 
 app.listen(3000, () => console.log('Listening on port: 3000'));
