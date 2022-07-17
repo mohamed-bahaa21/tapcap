@@ -1,6 +1,6 @@
 {
   "name": "tapcap",
-  "version": "0.0.7",
+  "version": "0.7.0",
   "description": "",
   "main": "index.js",
   "scripts": {
