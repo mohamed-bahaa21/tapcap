@@ -1,5 +1,5 @@
 {
-  "name": "tapcap",
+  "name": "ez-caption",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,7 +15,9 @@
     "video",
     "caption",
     "subtitle",
-    "tapcap"
+    "tapcap",
+    "naption",
+    "ez-caption"
   ],
   "author": "Mohamed Elzohary",
   "license": "ISC",
