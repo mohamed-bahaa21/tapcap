@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 const fs = require('fs');
-const { parse, resync, stringify, formatTimestamp, stringifySync } = require('subtitle');
+const { parse, resync, stringify, parseTimestamp, formatTimestamp, stringifySync } = require('subtitle');
 
 let LOCAL_STATIC_FILES_DIR = path.join(__dirname, 'public');
 
@@ -117,6 +117,33 @@ app.get('/delete-caption/:id', (req, res) => {
 
     res.send(list[id]);
 
+})
+
+app.post('/update-captions', (req, res) => {
+    const data = req.body;
+
+    let old_nodes = [];
+    const keys = Object.keys(data);
+
+    fs.createReadStream(webvtt_subtitle_path)
+        .pipe(parse())
+        .on('data', node => {
+            old_nodes.push(node)
+        })
+        .on('error', console.error)
+        .on('finish', () => {
+
+            for (let i = 0; i < keys.length; i++) {
+                const ele = keys[i];
+                old_nodes[ele].data.start = parseTimestamp(data[ele][0]);
+                old_nodes[ele].data.end = parseTimestamp(data[ele][1]);
+                old_nodes[ele].data.text = data[ele][2];
+            }
+
+            let new_data = stringifySync(old_nodes, { format: 'WebVTT' })
+            fs.createWriteStream(webvtt_subtitle_path).write(new_data);
+            res.redirect('/')
+        })
 })
 
 app.listen(3000, () => console.log('Listening on port: 3000'));

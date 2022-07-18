@@ -38,17 +38,15 @@ function init() {
 
 function updateTimeFrame(video) {
     if (video.duration) {
+        console.log("vid dur: " + video.duration);
+
         var durationTime = secTOtime(video.duration);
         var currentTime = secTOtime(video.currentTime);
-        var durationTxt, currentTxt;
 
-        if (durationTime.hoursT == "00") {
-            durationTxt = `${durationTime.minutesT}:${durationTime.secondsT}`;
-            currentTxt = `${currentTime.minutesT}:${currentTime.secondsT}`;
-        } else {
-            durationTxt = `${durationTime.hoursT}:${durationTime.minutesT}:${durationTime.secondsT}`;
-            currentTxt = `${currentTime.hoursT}:${currentTime.minutesT}:${currentTime.secondsT}`;
-        }
+        var timeTxt = timeTOtxt(durationTime, currentTime);
+        var durationTxt = timeTxt.durationTxt;
+        var currentTxt = timeTxt.currentTxt;
+
 
         video_duration.innerHTML = `${durationTxt} / ${currentTxt}`;
     } else {
@@ -152,29 +150,32 @@ function showCCList(track) {
             var cueStartTime = secTOtime(cues[i].startTime);
             var cueEndTime = secTOtime(cues[i].endTime);
 
-            var cueStartTimeTxt = `${(cueStartTime.hoursT !== "00") ?
-                `${cueStartTime.hoursT}:${cueStartTime.minutesT}:${cueStartTime.secondsT}` :
-                `${cueStartTime.minutesT}:${cueStartTime.secondsT}`}`
+            var timeTxt = timeTOtxt(cueStartTime, cueEndTime);
+            var cueStartTimeTxt = timeTxt.durationTxt;
+            var cueEndTimeTxt = timeTxt.currentTxt;
 
-            var cueEndTimeTxt = `${(cueEndTime.hoursT !== "00") ?
-                `${cueEndTime.hoursT}:${cueEndTime.minutesT}:${cueEndTime.secondsT}` :
-                `${cueEndTime.minutesT}:${cueEndTime.secondsT}`}`
+            // var cueStartTimeTxt = `${(cueStartTime.hoursT !== "00") ?
+            //     `${cueStartTime.hoursT}:${cueStartTime.minutesT}:${cueStartTime.secondsT}` :
+            //     `${cueStartTime.minutesT}:${cueStartTime.secondsT}`}`
+
+            // var cueEndTimeTxt = `${(cueEndTime.hoursT !== "00") ?
+            //     `${cueEndTime.hoursT}:${cueEndTime.minutesT}:${cueEndTime.secondsT}` :
+            //     `${cueEndTime.minutesT}:${cueEndTime.secondsT}`}`
 
             var cueId = cues[i].id;
             var cueTxt = cues[i].text;
 
             trackCC.innerHTML += `
-            <div class="cue_container cue_item sleepy_cue">
             <span class="cue_time">
-            <input class="time" type="text" name="name" value="${cueStartTimeTxt}" disabled/> 
-            <br> - 
-            <input class="time" type="text" name="name" value="${cueEndTimeTxt}" disabled/> 
+                <input class="time" type="text" name="${cueId}" value="${cueStartTimeTxt}" disabled/> 
+                <input class="time" type="text" name="${cueId}" value="${cueEndTimeTxt}" disabled/> 
             </span>
+            <div class="cue_container cue_item sleepy_cue">
             <li id='${cueId}'
                 class=''
                 onclick='jumpTo(${cues[i].startTime});'>
                 
-                <input class="text" type="text" name="name" value="${cueTxt}" disabled/>
+                <input class="text" type="text" name="${cueId}" value="${cueTxt}" disabled/>
             </li>
 
             <button id="delete_btn" type="button" onclick='deleteCC(${cueId});' disabled>
@@ -417,17 +418,37 @@ var changeButtonState = function (type) {
 }
 
 function secTOtime(base) {
+    // console.log(base);
+
+    const millieSeconds = Math.floor((base));
     const seconds = Math.floor((base / 1) % 60);
     const minutes = Math.floor((base / 60) % 60);
     const hours = Math.floor(base / 3600);
 
+    const milliSecondsT = `${millieSeconds}`.padStart(3, "0");
     const secondsT = `${seconds}`.padStart(2, "0");
     const minutesT = `${minutes}`.padStart(2, "0");
     const hoursT = `${hours}`.padStart(2, "0");
 
     return {
+        milliSecondsT,
         secondsT,
         minutesT,
         hoursT
+    }
+}
+
+function timeTOtxt(durationTime, currentTime) {
+    let durationTxt, currentTxt;
+    if (durationTime.hoursT == "00") {
+        durationTxt = `${durationTime.minutesT}:${durationTime.secondsT}.${durationTime.milliSecondsT}`;
+        currentTxt = `${currentTime.minutesT}:${currentTime.secondsT}.${currentTime.milliSecondsT}`;
+    } else {
+        durationTxt = `${durationTime.hoursT}:${durationTime.minutesT}:${durationTime.secondsT}.${durationTime.milliSecondsT}`;
+        currentTxt = `${currentTime.hoursT}:${currentTime.minutesT}:${currentTime.secondsT}.${currentTime.milliSecondsT}`;
+    }
+
+    return {
+        durationTxt, currentTxt
     }
 }
