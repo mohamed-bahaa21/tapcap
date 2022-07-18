@@ -33,19 +33,22 @@ function init() {
     showCurrentCC(tracks[0]);
     showCCList(tracks[0]);
     updateSeeker(video);
-    showCC(video)
+    // showCC(video)
 }
 
+var global_currTime;
 function updateTimeFrame(video) {
     if (video.duration) {
-        console.log("vid dur: " + video.duration);
+        // console.log("vid dur: " + video.duration);
 
         var durationTime = secTOtime(video.duration);
         var currentTime = secTOtime(video.currentTime);
 
         var timeTxt = timeTOtxt(durationTime, currentTime);
+
         var durationTxt = timeTxt.durationTxt;
         var currentTxt = timeTxt.currentTxt;
+        global_currTime = currentTxt;
 
 
         video_duration.innerHTML = `${durationTxt} / ${currentTxt}`;
@@ -142,7 +145,6 @@ function showCCList(track) {
         trackCC.innerHTML += `
             <div id="update_form_btns">
                 <button id="update_btn" type="submit" disabled>Update</button>
-                <button id="time_now" type="submit" disabled>Time Now</button>
             </div>
         `;
         for (var i = 0; i < cues.length; i++) {
@@ -167,8 +169,8 @@ function showCCList(track) {
 
             trackCC.innerHTML += `
             <span class="cue_time">
-                <input class="time" type="text" name="${cueId}" value="${cueStartTimeTxt}" disabled/> 
-                <input class="time" type="text" name="${cueId}" value="${cueEndTimeTxt}" disabled/> 
+                <input class="time" type="text" name="${cueId}" ondblclick="setInputTimeNow(this)" value="${cueStartTimeTxt}" disabled/> 
+                <input class="time" type="text" name="${cueId}" ondblclick="setInputTimeNow(this)" value="${cueEndTimeTxt}" disabled/> 
             </span>
             <div class="cue_container cue_item sleepy_cue">
             <li id='${cueId}'
@@ -307,6 +309,7 @@ var createMenuItem = function (id, lang, label) {
     if (lang.length > 0) button.setAttribute('lang', lang);
 
     button.value = label;
+
     button.setAttribute('data-state', 'inactive');
     button.appendChild(document.createTextNode(label));
 
@@ -331,6 +334,11 @@ var createMenuItem = function (id, lang, label) {
         subtitlesMenu.style.display == 'block' ? in_video_captions.classList.add('active') : in_video_captions.classList.remove('active');
     });
     subtitleMenuButtons.push(button);
+
+    // if (id == 'subtitles-English') {
+    //     video.textTracks[i].mode = 'showing';
+    //     subtitleMenuButtons[i].setAttribute('data-state', 'active');
+    // }
     return listItem;
 }
 

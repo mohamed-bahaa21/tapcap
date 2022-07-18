@@ -9,5 +9,6 @@
     "v0.7.0": "add-caption feature",
     "v0.8.0": "video controllers: timeframe-counter",
     "v0.9.0": "delete-caption feature",
-    "v1.0.0": "update-captions feature"
+    "v1.0.0": "update-captions feature",
+    "v1.1.0": "update-caption start/end time w/ double-click"
 }

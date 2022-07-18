@@ -337,7 +337,7 @@ li {
 
 .cue_item {
   margin-bottom: 1rem;
-  border-radius: 4px;
+  border-radius: 0 4px 4px 4px;
   padding: 1rem;
 }
 
