@@ -48,9 +48,9 @@ function updateTimeFrame(video) {
 
         var durationTxt = timeTxt.durationTxt;
         var currentTxt = timeTxt.currentTxt;
-        global_currTime = currentTxt;
 
 
+        global_currTime = `${durationTxt} / ${currentTxt}`;
         video_duration.innerHTML = `${durationTxt} / ${currentTxt}`;
     } else {
         durationTxt = `00:00:00`;
@@ -188,6 +188,10 @@ function showCCList(track) {
 
         }
     }
+}
+
+function setInputTimeNow(input) {
+    input.value = video.currentTime;
 }
 
 var deleteCue;

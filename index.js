@@ -20,6 +20,9 @@ app.use(
 );
 
 app.get('/', (req, res) => {
+    res.render('landing');
+})
+app.get('/demo', (req, res) => {
     res.render('index');
 })
 
