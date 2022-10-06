@@ -33,7 +33,7 @@ function init() {
     showCurrentCC(tracks[0]);
     showCCList(tracks[0]);
     updateSeeker(video);
-    // showCC(video)
+    showCC(video)
 }
 
 var global_currTime;
@@ -143,7 +143,8 @@ function showCCList(track) {
     if (track.track.mode === 'hidden') {
         trackCC.innerHTML = "";
         trackCC.innerHTML += `
-            <div id="update_form_btns">
+            <div id="update_form_btns" style="display:flex; justify-content: space-between; align-items: center;">
+                <span style="color: #bbb;">* Double-click on time to set to video's current time</span>
                 <button id="update_btn" type="submit" disabled>Update</button>
             </div>
         `;
@@ -261,7 +262,6 @@ function showCurrentCC(track) {
             }
         });
     }
-
 }
 
 // Btns Event Listeners ==================================

@@ -24,6 +24,7 @@
 .file-drop-area {
     position: relative;
     display: flex;
+    justify-content: center;
     align-items: center;
     width: 450px;
     max-width: 100%;

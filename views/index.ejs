@@ -68,18 +68,35 @@
     <div id="video_container" data-fullscreen="false" style="display: flex;" ondragenter="event.preventDefault();"
         ondragover="event.preventDefault();" ondrop="dropHandler(event);">
 
-        <div id="upload-video" style="display: none;" class="file-drop-area">
+        <div id="upload-video" style="display: flex;" class="file-drop-area">
             <span class="fake-btn">Choose files</span>
             <span class="file-msg">or drag and drop files here</span>
             <input class="file-input" type="file" name="file" id="file">
         </div>
 
-        <video id="video" style="" controls preload="metadata">
+        <video id="video" style="display: none;" controls preload="metadata">
             <source src="/video/video.mp4" type="video/mp4">
             <track label="English" kind="subtitles" srclang="English" src="./captions/video.vtt" default>
         </video>
 
-        <form action="/update-captions" method="post" id="cc_container" class="update_form" style="display: block;">
+        <div id="open-captions-cont" style="display: flex;" class="file-drop-area">
+            <button id="open-captions" class="clock">Open New Captions</button>
+        </div>
+
+
+        <form action="/update-captions" method="post" id="cc_container" class="update_form" style="display: none;">
+        </form>
+
+        <script>
+            let openCaptionsCont = document.getElementById('open-captions-cont');
+            let openCaptions = document.getElementById('open-captions');
+            let cc_container = document.getElementById('cc_container');
+
+            openCaptions.addEventListener('click', () => {
+                openCaptionsCont.style.display = 'none';
+                cc_container.style.display = 'block';
+            })
+        </script>
 
         </form>
         <ul id="cc_list" class='hidden'></ul>

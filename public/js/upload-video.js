@@ -2,7 +2,7 @@ var uploadDiv = document.getElementById("upload-video");
 var video = document.getElementById("video");
 var file = document.getElementById("file");
 
-var $droparea = $('#video_container');
+var $droparea = $('#upload-video');
 var $fileInput = $('#file');
 
 $fileInput.on('dragenter focus click', function () {
