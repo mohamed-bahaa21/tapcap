@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Lobster&display=swap");
+:root {
+  --font-family: "Poppins", system-ui;
+  /* --font-family-cursive: "Comfortaa", cursive; */
+  --font-family-cursive: "Lobster", cursive;
+}
 
 /* section 1 */
 body {
@@ -6,7 +11,7 @@ body {
   margin: 3em;
   background: #181818;
   color: #ddd;
-  font-family: "Comfortaa", cursive;
+  font-family: var(--font-family);
   font-size: 14px;
 }
 
@@ -14,7 +19,12 @@ body {
   box-sizing: border-box;
 }
 
+#header-nav a {
+  font-family: var(--font-family-cursive) !important;
+}
+
 #header-nav {
+  font-family: var(--font-family-cursive) !important;
   text-decoration: none;
   color: #fff;
 }
@@ -53,7 +63,7 @@ h6,
 label,
 .js-toggleForm,
 input[type="submit"] {
-  font-family: "Lobster", cursive;
+  /* font-family: var(--font-family); */
 }
 
 form {
@@ -425,7 +435,7 @@ button:disabled {
 
 figure {
   padding: 0;
-  font-family: cursive;
+  font-family: var(--font-family);
   font-size: 10px;
   margin: 0;
   transition: transform 1s ease-in-out;
