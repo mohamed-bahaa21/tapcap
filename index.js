@@ -93,7 +93,7 @@ app.post('/add-caption', (req, res) => {
             console.log('parser has finished')
         })
 
-    res.redirect('/')
+    res.redirect('/demo');
 })
 
 app.get('/delete-caption/:id', (req, res) => {
@@ -124,6 +124,7 @@ app.get('/delete-caption/:id', (req, res) => {
 
 app.post('/update-captions', (req, res) => {
     const data = req.body;
+    // res.send(data);
 
     let old_nodes = [];
     const keys = Object.keys(data);
@@ -145,8 +146,12 @@ app.post('/update-captions', (req, res) => {
 
             let new_data = stringifySync(old_nodes, { format: 'WebVTT' })
             fs.createWriteStream(webvtt_subtitle_path).write(new_data);
-            res.redirect('/')
+            res.redirect('/demo')
         })
+})
+
+app.post('/update-captions', (req, res) => {
+    
 })
 
 app.listen(3000, () => console.log('Listening on port: 3000'));

@@ -441,9 +441,9 @@ figure {
   transition: transform 1s ease-in-out;
 }
 img {
-  width: 100px;
-  display: block;
-  margin: auto;
+  /* width: 100px; */
+  /* display: block; */
+  /* margin: auto; */
 }
 
 figure:hover {

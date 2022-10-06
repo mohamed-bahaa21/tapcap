@@ -33,28 +33,49 @@
         <h1 style="text-align: center;">TapCap</h1>
     </a>
 
-    <form action="/add-caption" method="post">
-        <label for="video_time">Timeframe</label>
-        <input id="video_time" name="video_time" type="text" class='clock' value="">
-        <label for="new_caption">New Caption</label>
-        <input id="new_caption" name="new_caption" type="text" class='clock' value="">
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button id="download-btn" class="clock" type="submit" style="display: flex; align-items: center;">
+            <span style="display: inline-block;">Download Captions</span>
 
-        <input type="submit" id="add-caption" class="clock" value="Add Caption">
-    </form>
+            <img id="download-loader" style="display: none; margin-left: 0.4rem; width: 2.8em; opacity: 0.7;"
+                src="imgs/loader-white.png" alt="">
+        </button>
+        <script>
+            // alert('ak')
+            let download_btn = document.getElementById('download-btn');
+            let download_loader = document.getElementById('download-loader');
 
-    <button class="js-toggleForm clock">Enable Update</button>
+            download_btn.addEventListener('click', () => {
+                download_loader.style.display = 'inline-block';
+            })
+        </script>
+
+        <button class="js-toggleForm clock">Enable Update</button>
+
+        <form action="/add-caption" method="post">
+            <!-- <label for="video_time">Timeframe</label> -->
+            <input id="video_time" name="video_time" type="text" class='clock' value="" hidden>
+
+            <!-- <label for="new_caption">New Caption</label> -->
+            <input style="border: 0; border-radius: 0; font-size: 1.5em;" id="new_caption" name="new_caption"
+                type="text" class='clock' value="" placeholder="new caption here" required>
+
+            <input type="submit" id="add-caption" class="clock" value="Add Caption Here">
+        </form>
+    </div>
+
 
     <div id="video_container" data-fullscreen="false" style="display: flex;" ondragenter="event.preventDefault();"
         ondragover="event.preventDefault();" ondrop="dropHandler(event);">
 
-        <div id="upload-video" class="file-drop-area">
+        <div id="upload-video" style="display: none;" class="file-drop-area">
             <span class="fake-btn">Choose files</span>
             <span class="file-msg">or drag and drop files here</span>
             <input class="file-input" type="file" name="file" id="file">
         </div>
 
-        <video id="video" style="display: none;" controls preload="metadata">
-            <source src="/video/video-1.mp4" type="video/mp4">
+        <video id="video" style="" controls preload="metadata">
+            <source src="/video/video.mp4" type="video/mp4">
             <track label="English" kind="subtitles" srclang="English" src="./captions/video.vtt" default>
         </video>
 
@@ -96,6 +117,7 @@
     <script src="/js/script.js"></script>
     <script src="/js/video-timeline.js"></script>
     <script src="/js/toggle-update-form.js"></script>
+    <script src="/js/upload-video.js"></script>
 
 </body>
 

@@ -191,7 +191,10 @@ function showCCList(track) {
 }
 
 function setInputTimeNow(input) {
-    input.value = video.currentTime;
+    let newTime = secTOtime(video.currentTime);
+    let currentTxt = timeTOtxtWithHours(newTime);
+    // let currentTxt = `${newTime.hoursT}:${newTime.minutesT}:${newTime.secondsT}.${newTime.milliSecondsT}`;
+    input.value = currentTxt;
 }
 
 var deleteCue;
@@ -432,12 +435,12 @@ var changeButtonState = function (type) {
 function secTOtime(base) {
     // console.log(base);
 
-    const millieSeconds = Math.floor((base));
-    const seconds = Math.floor((base / 1) % 60);
+    const millieSeconds = String(base.toFixed(3)).split('.')[1];
+    const seconds = Math.floor((base) % 60);
     const minutes = Math.floor((base / 60) % 60);
     const hours = Math.floor(base / 3600);
 
-    const milliSecondsT = `${millieSeconds}`.padStart(3, "0");
+    const milliSecondsT = millieSeconds.padStart(3, "0");
     const secondsT = `${seconds}`.padStart(2, "0");
     const minutesT = `${minutes}`.padStart(2, "0");
     const hoursT = `${hours}`.padStart(2, "0");
@@ -448,6 +451,16 @@ function secTOtime(base) {
         minutesT,
         hoursT
     }
+}
+function timeTOtxtWithHours(currentTime) {
+    let currentTxt;
+    if (currentTime.hoursT == "00") {
+        currentTxt = `${currentTime.minutesT}:${currentTime.secondsT}.${currentTime.milliSecondsT}`;
+    } else {
+        currentTxt = `${currentTime.hoursT}:${currentTime.minutesT}:${currentTime.secondsT}.${currentTime.milliSecondsT}`;
+    }
+
+    return currentTxt;
 }
 
 function timeTOtxt(durationTime, currentTime) {
