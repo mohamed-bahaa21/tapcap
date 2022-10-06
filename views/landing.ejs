@@ -10,15 +10,14 @@
     <link rel="stylesheet" href="css/landing.css">
 </head>
 
-<body>
+<body style="background: radial-gradient(#342a6a, #181818); color: white;">
+    <!-- #181818 #225 -->
 
-    <!-- Canvas -->
-    <canvas class="orb-canvas"></canvas>
     <!-- Overlay -->
-    <div class="overlay">
+    <div>
         <!-- Overlay inner wrapper -->
         <div class="overlay__inner">
-            <div class="">
+            <div class="" style="text-align: center;">
                 <h1 id="typing" class="">
                     TapCap.
                 </h1>
@@ -26,27 +25,30 @@
             <br>
 
             <!-- Title -->
-            <h1 class="overlay__title">
-                Add <span class="text-gradient">captions to videos</span> Eazily.
+            <h1 class="overlay__title" style="text-align: center;">
+                Get <span class="text-gradient">captions to videos</span> Eazily.
             </h1>
             <!-- Description -->
-            
+
             <ul class="overlay__description">
-                <li><strong>Add/delete</strong> captions to your video.</li>
+                <li><strong>Add/delete</strong> captions from your video.</li>
                 <li><strong>Edit</strong> start/end time and content of each caption.</li>
                 <li><strong>Download</strong> the video with the captions, or only download the generated captions.</li>
-                <li><strong>Convert</strong> from WebVTT to SRT and vice-versa</li>
+                <li><strong>Convert</strong> between different caption file formats</li>
             </ul>
-            
+
             <!-- Buttons -->
-            <div class="overlay__btns">
-                <button class="overlay__btn overlay__btn--transparent">
-                    <a href="/demo">
+            <div class="overlay__btns" style="margin: 0 auto">
+                <button class="overlay__btn overlay__btn--transparent" style="color: hsl(0deg 0% 100%);
+                border-color: #fff;
+                font-weight: 500; box-shadow: 2px 2px #fff;">
+                    <a href="/demo" style="color: #fff;">
                         See a Demo
                     </a>
                 </button>
 
-                <button class="overlay__btn overlay__btn--colors">
+                <button class="overlay__btn overlay__btn--colors" style="color: #fff;
+                background: hsl(250deg 46% 52%); box-shadow: 3px 3px hsl(250deg 100% 73%);">
                     <span>Visit CodSki</span>
                     <span class="overlay__btn-emoji"></span>
                 </button>

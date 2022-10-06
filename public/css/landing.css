@@ -37,7 +37,7 @@ body {
   padding: 2rem;
   font-family: var(--font-family);
   color: var(--dark-color);
-  background: var(--bg-gradient);
+  /* background: var(--bg-gradient); */
 }
 
 .orb-canvas {
@@ -84,8 +84,8 @@ strong {
 .text-gradient {
   background-image: linear-gradient(
     45deg,
-    var(--base) 25%,
-    var(--complimentary2)
+    hsl(250deg 94% 74%) 25%,
+    hsl(310deg 85% 56%)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
