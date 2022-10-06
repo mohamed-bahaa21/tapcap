@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/video-timeline.css">
+    <link rel="stylesheet" href="/css/upload-video.css">
 </head>
 
 <body>
@@ -45,80 +46,6 @@
 
     <div id="video_container" data-fullscreen="false" style="display: flex;" ondragenter="event.preventDefault();"
         ondragover="event.preventDefault();" ondrop="dropHandler(event);">
-        <style>
-            #upload-video {
-                /* position: absolute; */
-                /* top: 45%; */
-                /* left: 20%; */
-                text-align: center;
-                z-index: 5;
-            }
-
-            #file::-webkit-file-upload-button {
-                background: #333;
-                border: 0px solid #aaa;
-                border-radius: 0.5em;
-                color: #bbb;
-                font: 90% normal "Menlo", monospace;
-                margin: 0.75em;
-                padding: 0.5em 1em;
-                text-align: center;
-            }
-
-            .drop-active {
-                background-color: #000000;
-            }
-
-            .file-drop-area {
-                position: relative;
-                display: flex;
-                align-items: center;
-                width: 450px;
-                max-width: 100%;
-                padding: 25px;
-                border: 1px dashed rgba(255, 255, 255, 0.4);
-                border-radius: 3px;
-                transition: 0.2s;
-            }
-
-            .file-drop-area.is-active {
-                background-color: rgba(255, 255, 255, 0.05);
-            }
-
-            .fake-btn {
-                flex-shrink: 0;
-                background-color: rgba(255, 255, 255, 0.04);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 3px;
-                padding: 8px 15px;
-                margin-right: 10px;
-                font-size: 12px;
-                text-transform: uppercase;
-            }
-
-            .file-msg {
-                font-size: small;
-                font-weight: 300;
-                line-height: 1.4;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .file-input {
-                position: absolute;
-                left: 0;
-                top: 0;
-                height: 100%;
-                width: 100%;
-                cursor: pointer;
-                opacity: 0;
-            }
-
-            .file-input:focus {
-                outline: none;
-            }
-        </style>
 
         <div id="upload-video" class="file-drop-area">
             <span class="fake-btn">Choose files</span>
@@ -169,41 +96,6 @@
     <script src="/js/script.js"></script>
     <script src="/js/video-timeline.js"></script>
     <script src="/js/toggle-update-form.js"></script>
-
-    <script>
-        var uploadDiv = document.getElementById("upload-video");
-        var video = document.getElementById("video");
-        var file = document.getElementById("file");
-
-        var $droparea = $('#video_container');
-        var $fileInput = $('#file');
-
-        $fileInput.on('dragenter focus click', function () {
-            $droparea.addClass('drop-active');
-        });
-
-        // back to normal state
-        $fileInput.on('dragleave blur drop', function () {
-            $droparea.removeClass('drop-active');
-        });
-
-        function dropHandler(e) {
-            e.preventDefault();
-            [].forEach.call(e.dataTransfer.files, file => {
-                uploadDiv.style.display = 'none';
-                video.style.display = 'block';
-                video.src = '/video/video.mp4';
-            });
-        }
-        file.onchange = function (e) {
-            // console.log(this.files[0]);
-            // console.log(this.value);
-            uploadDiv.style.display = 'none';
-            video.style.display = 'block';
-            video.src = '/video/video.mp4';
-        };
-
-    </script>
 
 </body>
 
